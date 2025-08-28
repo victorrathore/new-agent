@@ -1,0 +1,26 @@
+name: Deploy Static Website
+
+# Trigger workflow on push to main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+
+
+#Uses a popular action to deploy your repository to GitHub Pages.
+#github_token allows the workflow to push to gh-pages branch automatically.
+#publish_dir: . means publish everything in the repo root.
